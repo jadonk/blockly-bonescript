@@ -25,27 +25,6 @@ goog.provide('Blockly.JavaScript.bonescript');
 
 goog.require('Blockly.JavaScript');
 
-Blockly.JavaScript.bonescript_var_get = function() {
-  var code = Blockly.JavaScript.variableDB_.getName(this.getTitleValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
-};
-
-Blockly.JavaScript.bonescript_var_set = function() {
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  var varName = Blockly.JavaScript.variableDB_.getName(
-      this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
-  return varName + ' = ' + argument0 + ';\n';
-};
-
-Blockly.JavaScript.bonescript_getplatform = function() {
-  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
-  var text_val = this.getTitleValue('VAR');
-  var code = Blockly.JavaScript.bonescript_var() + '.getPlatform( function(' + text_val + '){\n   ' + statements_callback + '} );\n';
-  return code;
-};
-
 Blockly.JavaScript.bonescript_var = function() {
   if (!Blockly.JavaScript.definitions_['bonescript_var']) {
     var varName = Blockly.JavaScript.variableDB_.getDistinctName('b', Blockly.Generator.NAME_TYPE);
@@ -53,5 +32,27 @@ Blockly.JavaScript.bonescript_var = function() {
     Blockly.JavaScript.bonescript_var.varName = varName;
   }
   return Blockly.JavaScript.bonescript_var.varName;
+};
+
+Blockly.JavaScript.bonescript_getplatform = function() {
+  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
+  var varTemp = Blockly.Variables.generateUniqueName();
+  var varName = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleValue('name'), Blockly.Variables.NAME_TYPE);
+  var varSerialNumber = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleValue('serialNumber'), Blockly.Variables.NAME_TYPE);
+  var varVersion = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleValue('version'), Blockly.Variables.NAME_TYPE);
+  var varBonescript = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleValue('bonescript'), Blockly.Variables.NAME_TYPE);
+  var code = [];
+  code.push(Blockly.JavaScript.bonescript_var() + '.getPlatform( function(' + varTemp + '){');
+  code.push('  var ' + varName + ' = ' + varTemp + '.name;');
+  code.push('  var ' + varSerialNumber + ' = ' + varTemp + '.serialNumber;');
+  code.push('  var ' + varVersion + ' = ' + varTemp + '.version;');
+  code.push('  var ' + varBonescript + ' = ' + varTemp + '.bonescript;');
+  code.push(statements_callback);
+  code.push('});');
+  return code.join('\n')+'\n';
 };
 
