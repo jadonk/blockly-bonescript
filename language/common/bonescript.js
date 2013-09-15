@@ -25,7 +25,7 @@ goog.provide('Blockly.Language.bonescript');
 
 goog.require('Blockly.Language');
 
-Blockly.Language.bonescript_getplatform = {
+Blockly.Language.bonescript_getplatform_firsttry = {
   helpUrl: 'http://beagleboard.org/Support/BoneScript/getPlatform/',
   init: function() {
     this.setColour(210);
@@ -39,3 +39,92 @@ Blockly.Language.bonescript_getplatform = {
     this.setTooltip('');
   }
 };
+
+Blockly.Language.bonescript_var_get = {
+  category: null,  // Variables are handled specially.
+  helpUrl: '',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle('get')
+        .appendTitle(new Blockly.FieldVariable(
+        'item'), 'VAR');
+    this.setOutput(true, null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return [this.getTitleValue('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  },
+  contextMenuMsg_: '',
+  contextMenuType_: 'bonescript_var_set',
+  customContextMenu: function(options) {
+    var option = {enabled: true};
+    var name = this.getTitleValue('VAR');
+    option.text = this.contextMenuMsg_.replace('%1', name);
+    var xmlTitle = goog.dom.createDom('title', null, name);
+    xmlTitle.setAttribute('name', 'VAR');
+    var xmlBlock = goog.dom.createDom('block', null, xmlTitle);
+    xmlBlock.setAttribute('type', 'bonescript_var_set');
+    option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
+    options.push(option);
+  }
+};
+
+Blockly.Language.bonescript_var_set = {
+  category: null,  // Variables are handled specially.
+  helpUrl: '',
+  init: function() {
+    this.setColour(210);
+    this.appendValueInput('VALUE')
+        .appendTitle('set')
+        .appendTitle(new Blockly.FieldVariable(
+        'item'), 'VAR');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return [this.getTitleValue('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  },
+  contextMenuMsg_: '',
+  contextMenuType_: 'bonescript_var_get',
+  customContextMenu: Blockly.Language.bonescript_var_get.customContextMenu
+};
+
+Blockly.Language.bonescript_getplatform = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/getPlatform/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("getPlatform")
+        .appendTitle(new Blockly.FieldVariable(
+        'item'), 'VAR');
+    this.appendStatementInput("callback");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return [this.getTitleValue('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  },
+  contextMenuMsg_: '',
+  contextMenuType_: 'bonescript_var_get',
+  customContextMenu: Blockly.Language.bonescript_var_get.customContextMenu
+};
+
