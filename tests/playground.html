@@ -12,6 +12,8 @@
 <script type="text/javascript" src="../generators/javascript/colour.js"></script>
 <script type="text/javascript" src="../generators/javascript/variables.js"></script>
 <script type="text/javascript" src="../generators/javascript/procedures.js"></script>
+<script type="text/javascript" src="../generators/javascript/bonescript.js"></script>
+<script type="text/javascript" src="../generators/javascript/javascript.js"></script>
 <script type="text/javascript" src="../generators/python.js"></script>
 <script type="text/javascript" src="../generators/python/control.js"></script>
 <script type="text/javascript" src="../generators/python/logic.js"></script>
@@ -30,6 +32,8 @@
 <script type="text/javascript" src="../language/common/colour.js"></script>
 <script type="text/javascript" src="../language/common/variables.js"></script>
 <script type="text/javascript" src="../language/common/procedures.js"></script>
+<script type="text/javascript" src="../language/common/bonescript.js"></script>
+<script type="text/javascript" src="../language/common/javascript.js"></script>
 <script type="text/javascript">
 'use strict';
 // Depending on the URL argument, render as LTR or RTL.
@@ -255,6 +259,13 @@ h1 {
     </category>
     <category name="Variables" custom="VARIABLE"></category>
     <category name="Procedures" custom="PROCEDURE"></category>
+    <category name="BoneScript">
+      <block type="bonescript_getplatform"></block>
+    </category>
+    <category name="JavaScript">
+      <block type="javascript_settimeout"></block>
+      <block type="javascript_consolelog"></block>
+    </category>
   </xml>
 
   <h1>Blockly Playground</h1>
