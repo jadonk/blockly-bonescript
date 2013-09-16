@@ -34,25 +34,63 @@ Blockly.JavaScript.bonescript_var = function() {
   return Blockly.JavaScript.bonescript_var.varName;
 };
 
+Blockly.JavaScript.bonescript_pin = function() {
+  var code = "'" + this.getTitleValue('PIN') + "'";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.JavaScript.bonescript_direction = function() {
+  var code = "'" + this.getTitleValue('DIR') + "'";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
 Blockly.JavaScript.bonescript_getplatform = function() {
   var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
   var varTemp = Blockly.Variables.generateUniqueName();
-  var varName = Blockly.JavaScript.variableDB_.getName(
-      this.getTitleValue('name'), Blockly.Variables.NAME_TYPE);
-  var varSerialNumber = Blockly.JavaScript.variableDB_.getName(
-      this.getTitleValue('serialNumber'), Blockly.Variables.NAME_TYPE);
-  var varVersion = Blockly.JavaScript.variableDB_.getName(
-      this.getTitleValue('version'), Blockly.Variables.NAME_TYPE);
-  var varBonescript = Blockly.JavaScript.variableDB_.getName(
-      this.getTitleValue('bonescript'), Blockly.Variables.NAME_TYPE);
   var code = [];
   code.push(Blockly.JavaScript.bonescript_var() + '.getPlatform( function(' + varTemp + '){');
-  code.push('  var ' + varName + ' = ' + varTemp + '.name;');
-  code.push('  var ' + varSerialNumber + ' = ' + varTemp + '.serialNumber;');
-  code.push('  var ' + varVersion + ' = ' + varTemp + '.version;');
-  code.push('  var ' + varBonescript + ' = ' + varTemp + '.bonescript;');
+  code = uniquifyLocal(this, code, varTemp, 'name');
+  code = uniquifyLocal(this, code, varTemp, 'serialNumber');
+  code = uniquifyLocal(this, code, varTemp, 'version');
+  code = uniquifyLocal(this, code, varTemp, 'bonescript');
   code.push(statements_callback);
   code.push('});');
   return code.join('\n')+'\n';
 };
 
+Blockly.JavaScript.bonescript_pinmode = function() {
+  var value_pin = Blockly.JavaScript.valueToCode(this, 'pin', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_direction = Blockly.JavaScript.valueToCode(this, 'direction', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = Blockly.JavaScript.bonescript_var();
+  code += '.pinMode(';
+  code += value_pin;
+  code += ', ';
+  code += value_direction;
+  code += ');\n';
+  return code;
+};
+
+Blockly.JavaScript.bonescript_getpinmode = function() {
+  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
+  var value_pin = Blockly.JavaScript.valueToCode(this, 'pin', Blockly.JavaScript.ORDER_ATOMIC);
+  var varTemp = Blockly.Variables.generateUniqueName();
+  var code = [];
+  code.push(Blockly.JavaScript.bonescript_var() + '.getPinMode(');
+  code.push('  ' + value_pin + ', function(' + varTemp + '){');
+  code = uniquifyLocal(this, code, varTemp, 'mux');
+  code = uniquifyLocal(this, code, varTemp, 'slew');
+  code = uniquifyLocal(this, code, varTemp, 'rx');
+  code = uniquifyLocal(this, code, varTemp, 'pullup');
+  code = uniquifyLocal(this, code, varTemp, 'name');
+  code = uniquifyLocal(this, code, varTemp, 'err');
+  code.push(statements_callback);
+  code.push('});');
+  return code.join('\n')+'\n';
+};
+
+function uniquifyLocal(block, code, varTemp, varName) {
+  var varUnique = Blockly.JavaScript.variableDB_.getName(
+      block.getTitleValue(varName), Blockly.Variables.NAME_TYPE);
+  code.push('  var ' + varUnique + ' = ' + varTemp + '.' + varName + ';');
+  return code;
+}

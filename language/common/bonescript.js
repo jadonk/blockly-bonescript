@@ -25,6 +25,30 @@ goog.provide('Blockly.Language.bonescript');
 
 goog.require('Blockly.Language');
 
+Blockly.Language.bonescript_pin = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript#pin',
+  init: function() {
+    this.setColour(210);
+    this.setOutput(true, 'Pin');
+    this.appendDummyInput()
+        .appendTitle("pin")
+        .appendTitle(new Blockly.FieldTextInput("USR0"), "PIN");
+    this.setTooltip('');
+  }
+};
+
+Blockly.Language.bonescript_direction = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript#pin',
+  init: function() {
+    this.setColour(210);
+    this.setOutput(true, 'Direction');
+    this.appendDummyInput()
+        .appendTitle("direction")
+        .appendTitle(new Blockly.FieldDropdown([['in', 'in'], ['out', 'out']]), "DIR");
+    this.setTooltip('');
+  }
+};
+
 Blockly.Language.bonescript_getplatform = {
   helpUrl: 'http://beagleboard.org/Support/BoneScript/getPlatform/',
   init: function() {
@@ -38,7 +62,7 @@ Blockly.Language.bonescript_getplatform = {
         .appendTitle(new Blockly.FieldVariable(
         'version'), 'version')
         .appendTitle(new Blockly.FieldVariable(
-        'bonescript'), 'bonescript')
+        'bonescript'), 'bonescript');
     this.appendStatementInput("callback");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
@@ -50,6 +74,69 @@ Blockly.Language.bonescript_getplatform = {
         this.getTitleValue('serialNumber'),
         this.getTitleValue('version'),
         this.getTitleValue('bonescript')
+    ];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  },
+  contextMenuMsg_: '',
+  contextMenuType_: 'variables_get',
+  customContextMenu: Blockly.Language.variables_get.customContextMenu
+};
+
+Blockly.Language.bonescript_pinmode = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/pinMode/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("pinMode");
+    this.appendValueInput("pin")
+        .setCheck("Pin");
+    this.appendValueInput("direction")
+        .setCheck("Direction");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
+Blockly.Language.bonescript_getpinmode = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/getPinMode/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("getPinMode");
+    this.appendValueInput("pin")
+        .setCheck("Pin");
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldVariable(
+        'mux'), 'mux')
+        .appendTitle(new Blockly.FieldVariable(
+        'slew'), 'slew')
+        .appendTitle(new Blockly.FieldVariable(
+        'rx'), 'rx')
+        .appendTitle(new Blockly.FieldVariable(
+        'pullup'), 'pullup')
+        .appendTitle(new Blockly.FieldVariable(
+        'name'), 'name')
+        .appendTitle(new Blockly.FieldVariable(
+        'err'), 'err');
+    this.appendStatementInput("callback");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return [this.getTitleValue('mux'),
+        this.getTitleValue('slew'),
+        this.getTitleValue('rx'),
+        this.getTitleValue('pullup'),
+        this.getTitleValue('name'),
+        this.getTitleValue('err')
     ];
   },
   renameVar: function(oldName, newName) {
