@@ -88,9 +88,22 @@ Blockly.JavaScript.bonescript_getpinmode = function() {
   return code.join('\n')+'\n';
 };
 
+Blockly.JavaScript.bonescript_digitalwrite = function() {
+  var value_pin = Blockly.JavaScript.valueToCode(this, 'pin', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_value = Blockly.JavaScript.valueToCode(this, 'value', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = Blockly.JavaScript.bonescript_var();
+  code += '.digitalWrite(';
+  code += value_pin;
+  code += ', ';
+  code += value_value;
+  code += ');\n';
+  return code;
+};
+
 function uniquifyLocal(block, code, varTemp, varName) {
   var varUnique = Blockly.JavaScript.variableDB_.getName(
       block.getTitleValue(varName), Blockly.Variables.NAME_TYPE);
   code.push('  var ' + varUnique + ' = ' + varTemp + '.' + varName + ';');
   return code;
 }
+

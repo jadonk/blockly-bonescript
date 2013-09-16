@@ -149,3 +149,20 @@ Blockly.Language.bonescript_getpinmode = {
   customContextMenu: Blockly.Language.variables_get.customContextMenu
 };
 
+Blockly.Language.bonescript_digitalwrite = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/digitalWrite/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("digitalWrite");
+    this.appendValueInput("pin")
+        .setCheck("Pin");
+    this.appendValueInput("value")
+        .setCheck(Number);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+

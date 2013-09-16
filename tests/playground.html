@@ -282,8 +282,19 @@ h1 {
           </block>
         </value>
       </block>
+      <block type="bonescript_digitalwrite">
+        <value name="pin">
+          <block type="bonescript_pin">
+            <title name="PIN">USR0</title>
+          </block>
+        </value>
+        <value name="value">
+          <block type="math_number">
+            <title name="NUM">1</title>
+          </block>
+        </value>
+      </block>
       <!--
-      <block type="bonescript_digitalwrite"></block>
       <block type="bonescript_digitalread"></block>
       <block type="bonescript_shiftout"></block>
       <block type="bonescript_analogwrite"></block>
