@@ -183,3 +183,64 @@ Blockly.Language.bonescript_analogwrite = {
   }
 };
 
+Blockly.Language.bonescript_digitalread = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/digitalRead/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("digitalRead");
+    this.appendValueInput("pin")
+        .setCheck("Pin");
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldVariable(
+        'value'), 'value');
+    this.appendStatementInput("callback");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return [this.getTitleValue('value')
+    ];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  },
+  contextMenuMsg_: '',
+  contextMenuType_: 'variables_get',
+  customContextMenu: Blockly.Language.variables_get.customContextMenu
+};
+
+Blockly.Language.bonescript_analogread = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/analogRead/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("analogRead");
+    this.appendValueInput("pin")
+        .setCheck("Pin");
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldVariable(
+        'value'), 'value');
+    this.appendStatementInput("callback");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return [this.getTitleValue('value')
+    ];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  },
+  contextMenuMsg_: '',
+  contextMenuType_: 'variables_get',
+  customContextMenu: Blockly.Language.variables_get.customContextMenu
+};

@@ -112,6 +112,32 @@ Blockly.JavaScript.bonescript_analogwrite = function() {
   return code;
 };
 
+Blockly.JavaScript.bonescript_digitalread = function() {
+  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
+  var value_pin = Blockly.JavaScript.valueToCode(this, 'pin', Blockly.JavaScript.ORDER_ATOMIC);
+  var varTemp = Blockly.Variables.generateUniqueName();
+  var code = [];
+  code.push(Blockly.JavaScript.bonescript_var() + '.digitalRead(');
+  code.push('  ' + value_pin + ', function(' + varTemp + '){');
+  code = uniquifyLocal(this, code, varTemp, 'value');
+  code.push(statements_callback);
+  code.push('});');
+  return code.join('\n')+'\n';
+};
+
+Blockly.JavaScript.bonescript_analogread = function() {
+  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
+  var value_pin = Blockly.JavaScript.valueToCode(this, 'pin', Blockly.JavaScript.ORDER_ATOMIC);
+  var varTemp = Blockly.Variables.generateUniqueName();
+  var code = [];
+  code.push(Blockly.JavaScript.bonescript_var() + '.analogRead(');
+  code.push('  ' + value_pin + ', function(' + varTemp + '){');
+  code = uniquifyLocal(this, code, varTemp, 'value');
+  code.push(statements_callback);
+  code.push('});');
+  return code.join('\n')+'\n';
+};
+
 function uniquifyLocal(block, code, varTemp, varName) {
   var varUnique = Blockly.JavaScript.variableDB_.getName(
       block.getTitleValue(varName), Blockly.Variables.NAME_TYPE);
