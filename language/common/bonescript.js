@@ -166,3 +166,20 @@ Blockly.Language.bonescript_digitalwrite = {
   }
 };
 
+Blockly.Language.bonescript_analogwrite = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/analogWrite/',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle("analogWrite");
+    this.appendValueInput("pin")
+        .setCheck("Pin");
+    this.appendValueInput("value")
+        .setCheck(Number);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
