@@ -327,9 +327,13 @@ h1 {
       -->
     </category>
     <category name="Timers">
-      <!--
-      <block type="javascript_setinterval"></block>
-      -->
+      <block type="javascript_setinterval">
+        <value name="interval">
+          <block type="math_number">
+            <title name="NUM">1000</title>
+          </block>
+        </value>
+      </block>
       <block type="javascript_settimeout">
         <value name="timeout">
           <block type="math_number">

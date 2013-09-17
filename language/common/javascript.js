@@ -25,6 +25,20 @@ goog.provide('Blockly.Language.javascript');
 
 goog.require('Blockly.Language');
 
+Blockly.Language.javascript_setinterval = {
+  helpUrl: 'http://beagleboard.org/Support/BoneScript/setInterval/',
+  init: function() {
+    this.setColour(210);
+    this.appendValueInput("interval")
+        .setCheck(Number)
+        .appendTitle("setInterval");
+    this.appendStatementInput("callback");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
 Blockly.Language.javascript_settimeout = {
   helpUrl: 'http://beagleboard.org/Support/BoneScript/setTimeout/',
   init: function() {

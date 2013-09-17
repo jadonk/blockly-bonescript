@@ -36,8 +36,20 @@ Blockly.JavaScript.javascript_settimeout = function() {
   return code;
 };
 
+Blockly.JavaScript.javascript_setinterval = function() {
+  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
+  var value_interval = Blockly.JavaScript.valueToCode(this, 'interval', Blockly.JavaScript.ORDER_COMMA);
+  var code = 'setInterval( function(){\n';
+  code += statements_callback;
+  code += '}, ';
+  code +=  value_interval;
+  code += ');\n';
+  return code;
+};
+
 Blockly.JavaScript.javascript_consolelog = function() {
   var value_log = Blockly.JavaScript.valueToCode(this, 'log', Blockly.JavaScript.ORDER_COMMA) || null;
   var code = 'console.log(' + value_log + ');\n';
   return code;
 };
+
