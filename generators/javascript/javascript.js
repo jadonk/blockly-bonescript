@@ -26,9 +26,13 @@ goog.provide('Blockly.JavaScript.javascript');
 goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript.javascript_settimeout = function() {
-  var value_callback = Blockly.JavaScript.valueToCode(this, 'callback', Blockly.JavaScript.ORDER_COMMA);
+  var statements_callback = Blockly.JavaScript.statementToCode(this, 'callback');
   var value_timeout = Blockly.JavaScript.valueToCode(this, 'timeout', Blockly.JavaScript.ORDER_COMMA);
-  var code = 'setTimeout(' + value_callback + ', ' + value_timeout + ');\n';
+  var code = 'setTimeout( function(){\n';
+  code += statements_callback;
+  code += '}, ';
+  code +=  value_timeout;
+  code += ');\n';
   return code;
 };
 
