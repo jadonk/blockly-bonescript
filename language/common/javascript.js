@@ -29,11 +29,9 @@ Blockly.Language.javascript_settimeout = {
   helpUrl: 'http://beagleboard.org/Support/BoneScript/setTimeout/',
   init: function() {
     this.setColour(210);
-    this.appendDummyInput()
-        .appendTitle("setTimeout");
     this.appendValueInput("timeout")
-        .appendTitle("timeout")
-        .setCheck("Number");
+        .setCheck(Number)
+        .appendTitle("setTimeout");
     this.appendStatementInput("callback");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -45,9 +43,8 @@ Blockly.Language.javascript_consolelog = {
   helpUrl: 'http://beagleboard.org/Support/BoneScript/console/',
   init: function() {
     this.setColour(210);
-    this.appendDummyInput()
+    this.appendValueInput("log")
         .appendTitle("console.log");
-    this.appendValueInput("log");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
