@@ -261,12 +261,15 @@ h1 {
     <category name="Procedures" custom="PROCEDURE"></category>
     <category name="BoneScript">
       <block type="bonescript_pin"></block>
+      <block type="bonescript_pin_digital"></block>
+      <block type="bonescript_pin_analogin"></block>
+      <block type="bonescript_pin_analogout"></block>
       <block type="bonescript_direction"></block>
       <block type="bonescript_getplatform"></block>
       <block type="bonescript_pinmode">
         <value name="pin">
-          <block type="bonescript_pin">
-            <title name="PIN">USR0</title>
+          <block type="bonescript_pin_digital">
+            <title name="PIN">P9_11</title>
           </block>
         </value>
         <value name="direction">
@@ -277,15 +280,15 @@ h1 {
       </block>
       <block type="bonescript_getpinmode">
         <value name="pin">
-          <block type="bonescript_pin">
-            <title name="PIN">P9_14</title>
+          <block type="bonescript_pin_digital">
+            <title name="PIN">P9_11</title>
           </block>
         </value>
       </block>
       <block type="bonescript_digitalwrite">
         <value name="pin">
-          <block type="bonescript_pin">
-            <title name="PIN">USR0</title>
+          <block type="bonescript_pin_digital">
+            <title name="PIN">P9_11</title>
           </block>
         </value>
         <value name="value">
@@ -296,7 +299,7 @@ h1 {
       </block>
       <block type="bonescript_analogwrite">
         <value name="pin">
-          <block type="bonescript_pin">
+          <block type="bonescript_pin_analogout">
             <title name="PIN">P9_14</title>
           </block>
         </value>
@@ -308,14 +311,14 @@ h1 {
       </block>
       <block type="bonescript_digitalread">
         <value name="pin">
-          <block type="bonescript_pin">
+          <block type="bonescript_pin_digital">
             <title name="PIN">P9_11</title>
           </block>
         </value>
       </block>
       <block type="bonescript_analogread">
         <value name="pin">
-          <block type="bonescript_pin">
+          <block type="bonescript_pin_analogin">
             <title name="PIN">P9_33</title>
           </block>
         </value>

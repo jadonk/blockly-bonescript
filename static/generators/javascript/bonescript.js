@@ -39,6 +39,10 @@ Blockly.JavaScript.bonescript_pin = function() {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
+Blockly.JavaScript.bonescript_pin_digital = Blockly.JavaScript.bonescript_pin;
+Blockly.JavaScript.bonescript_pin_analogin = Blockly.JavaScript.bonescript_pin;
+Blockly.JavaScript.bonescript_pin_analogout = Blockly.JavaScript.bonescript_pin;
+
 Blockly.JavaScript.bonescript_direction = function() {
   var code = "'" + this.getTitleValue('DIR') + "'";
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
